@@ -10,7 +10,7 @@ import (
 	"read-adviser-bot/events/telegram/storage/files"
 )
 
-// 6636181265:AAFPzK5mwmmor8CX1UZe5wqVs5--w_VWyhs
+
 func main() {
 	const (
 		tgBotHost   = "api.telegram.org"
