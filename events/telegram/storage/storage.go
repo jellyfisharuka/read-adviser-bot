@@ -2,10 +2,13 @@ package storage
 
 import (
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"io"
 	e "read-adviser-bot/clients/telegram/lib"
 )
+
+var ErrNoSavedPages = errors.New("no saved pages")
 
 type Storage interface {
 	Save(p *Page) error
@@ -27,5 +30,5 @@ func (p Page) Hash() (string, error) {
 	if _, err := io.WriteString(h, p.UserName); err != nil {
 		return "", e.Wrap("can't calculate hash", err)
 	}
- return fmt.Sprintf("%x", h.Sum(nil)), nil
+	return fmt.Sprintf("%x", h.Sum(nil)), nil
 }
