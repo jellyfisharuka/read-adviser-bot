@@ -10,10 +10,11 @@ import (
 	"read-adviser-bot/events/telegram/storage/files"
 )
 
+// 6636181265:AAFPzK5mwmmor8CX1UZe5wqVs5--w_VWyhs
 func main() {
 	const (
 		tgBotHost   = "api.telegram.org"
-		storagePath = "storage"
+		storagePath = "files_storage"
 		batchSize   = 100
 	)
 	//token=flags.Get(token)
@@ -33,7 +34,7 @@ func main() {
 }
 func mustToken() string {
 	token := flag.String(
-		"token-bot-token",
+		"tg-bot-token",
 		"",
 		"token for access to telegram bot",
 	)
