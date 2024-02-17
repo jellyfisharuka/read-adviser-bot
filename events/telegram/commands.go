@@ -16,7 +16,7 @@ const (
 	StartCmd = "/start"
 )
 
-func (p *Processor) doCmd(text string, chatID int, username string) error {
+func (p *Processor) doCmd(text string, chatID int, username string,keyword string) error {
 	text = strings.TrimSpace(text)
 	log.Printf("got new command '%s' from '%s'", text, username)
 	//add page: http////
@@ -25,7 +25,7 @@ func (p *Processor) doCmd(text string, chatID int, username string) error {
 	//start: /start  hi+help
 	if isAddCmd(text) {
 		//TODO: AddPage()
-		return p.savePage(chatID, text, username)
+		return p.savePage(chatID, text, username,keyword)
 	}
 	switch text {
 	case RndCmd:
@@ -39,11 +39,12 @@ func (p *Processor) doCmd(text string, chatID int, username string) error {
 
 	}
 }
-func (p *Processor) savePage(chatID int, pageURL string, username string) (err error) {
+func (p *Processor) savePage(chatID int, pageURL string, username string, keyword string) (err error) {
 	defer func() { err = e.WrapIfErr("can't do command: save page", err) }()
 	page := &storage.Page{
 		URL:      pageURL,
 		UserName: username,
+		KeyWord: keyword,
 	}
 	isExists, err := p.storage.IsExists(page)
 	if err != nil {

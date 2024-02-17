@@ -16,6 +16,8 @@ type Processor struct {
 type Meta struct {
 	ChatID   int
 	Username string
+	KeyWord string
+	
 }
 
 var (
@@ -58,7 +60,7 @@ func (p *Processor) processMessage(event events.Event) error{
 		return e.Wrap("can't process message", err)
 	}
 
-	if err := p.doCmd(event.Text, meta.ChatID, meta.Username); err != nil {
+	if err := p.doCmd(event.Text, meta.ChatID, meta.Username, meta.KeyWord); err != nil {
 		return e.Wrap("can't process message", err)
 	}
   return nil
@@ -80,6 +82,7 @@ func event(upd telegram.Update) events.Event {
 		res.Meta = Meta{
 			ChatID:   upd.Message.Chat.ID,
 			Username: upd.Message.From.Username,
+			KeyWord: upd.Message.From.,
 		}
 	}
 	return res
